@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elgammal Signature Digital</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script type="text/javascript" src="../js/docxviewer/jszip.js"></script>
+    <script src="../js/docxviewer/docx_preview.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <div class="key-block">
+        <div
+          style="
+            width: 100%;
+            padding-top: 6px;
+            text-align: center;
+            height: 60px;
+            font-size: 30px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          "
+        >
+          Tạo khóa
+        </div>
+        <div style="padding: 20px">
+          <span style="font-size: 28px; text-decoration: underline"
+            >Public key</span
+          >
+          <div class="public-key">
+            <div class="wrapper">
+              <div class="input-data">
+                <input type="text" class="p-prime" required />
+                <div class="underline"></div>
+                <label>Số nguyên tố p</label>
+              </div>
+            </div>
+            <div class="wrapper">
+              <div class="input-data">
+                <input type="text" required class="alpha-number" />
+                <div class="underline"></div>
+                <label>Số α</label>
+              </div>
+            </div>
+            <div class="wrapper">
+              <div class="input-data">
+                <input type="text" required class="beta-number" />
+                <div class="underline"></div>
+                <label>Số β (β = α<sup>a</sup> mod p)</label>
+              </div>
+            </div>
+          </div>
+          <span style="font-size: 28px; text-decoration: underline"
+            >Private key</span
+          >
+          <div class="private-key">
+            <div class="wrapper">
+              <div class="input-data">
+                <input type="text" required class="private-number-a" />
+                <div class="underline"></div>
+                <label>Số bí mật thứ nhất: a</label>
+              </div>
+            </div>
+          </div>
+          <span style="font-size: 28px; text-decoration: underline"
+            >Xây dựng hàm kí</span
+          >
+          <div>
+            <div class="wrapper">
+              <div class="input-data">
+                <input type="text" required class="private-number-k" />
+                <div class="underline"></div>
+                <label>Số bí mật thứ hai: k</label>
+              </div>
+            </div>
+            <div class="wrapper">
+              <div class="input-data">
+                <input type="text" required class="gammal-number" />
+                <div class="underline"></div>
+                <label>ɣ = α<sup>k</sup> mod p</label>
+              </div>
+            </div>
+          </div>
+          <button
+            class="btn-style generate-full"
+            style="margin: 12px 0px 0px 75px"
+          >
+            Tạo ngẫu nhiên
+          </button>
+        </div>
+      </div>
+      <div
+        style="
+          display: inline-block;
+          position: absolute;
+          top: 152px;
+          left: 340px;
+        "
+      >
+        <div class="error-message error-0">!</div>
+        <div class="message message-0"></div>
+      </div>
+      <div
+        style="
+          display: inline-block;
+          position: absolute;
+          top: 232px;
+          left: 340px;
+        "
+      >
+        <div class="error-message error-1">!</div>
+        <div class="message message-1"></div>
+      </div>
+
+      <div
+        style="
+          display: inline-block;
+          position: absolute;
+          top: 307px;
+          left: 340px;
+        "
+      >
+        <div class="error-message error-2">!</div>
+        <div class="message message-2"></div>
+      </div>
+
+      <div
+        style="
+          display: inline-block;
+          position: absolute;
+          top: 426px;
+          left: 340px;
+        "
+      >
+        <div class="error-message error-3">!</div>
+        <div class="message message-3"></div>
+      </div>
+
+      <div
+        style="
+          display: inline-block;
+          position: absolute;
+          top: 544px;
+          left: 340px;
+        "
+      >
+        <div class="error-message error-4">!</div>
+        <div class="message message-4"></div>
+      </div>
+
+      <div
+        style="
+          display: inline-block;
+          position: absolute;
+          top: 621px;
+          left: 340px;
+        "
+      >
+        <div class="error-message error-5">!</div>
+        <div class="message message-5"></div>
+      </div>
+
+      <div class="generate-signature">
+        <div
+          style="
+            display: inline-block;
+            position: absolute;
+            top: 82px;
+            left: 776px;
+          "
+        >
+          <div class="error-message error-6">!</div>
+          <div class="message message-6"></div>
+        </div>
+        <div
+          style="
+            width: 100%;
+            padding-top: 6px;
+            text-align: center;
+            height: 60px;
+            font-size: 30px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          "
+        >
+          Phát sinh chữ ký
+        </div>
+        <div style="padding: 20px">
+          <div style="display: flex">
+            <div style="margin-right: 12px">Văn bản ký:</div>
+            <div
+              class="plain-text-input"
+              contenteditable="true"
+              style="
+                white-space: pre-wrap;
+                width: 300px;
+                height: 260px;
+                padding: 5px;
+                overflow: auto;
+                overflow-x: auto;
+                border: 1px solid black;
+              "
+            ></div>
+            <div style="margin-left: 10px; width: 96px">
+              <button class="btn-style btn-file-upload-0" style="width: 100px">
+                File
+              </button>
+              <input
+                type="file"
+                class="input-file-upload input-file-upload-0"
+                hidden
+                accept=".txt, .docx"
+              />
+              <textarea
+                name="output-file-name"
+                class="output-file-name-0"
+                style="
+                  width: 101px;
+                  height: 160px;
+                  resize: none;
+                  margin-top: 5px;
+                  border: none;
+                "
+                id=""
+                cols="30"
+                rows="10"
+                readonly
+              ></textarea>
+            </div>
+          </div>
+          <div style="padding: 20px">
+            <button
+              class="btn-style btn-action-signature"
+              style="margin-left: 205px"
+            >
+              Ký
+            </button>
+          </div>
+          <div>
+            <div style="display: flex">
+              <div style="margin-right: 45px">Chữ ký:</div>
+              <div
+                class="output-signature-digital"
+                contenteditable="false"
+                style="
+                  width: 300px;
+                  height: 260px;
+                  padding: 5px;
+                  overflow: auto;
+                  border: 1px solid black;
+                "
+              ></div>
+              <div style="margin-left: 10px; width: 96px">
+                <button
+                  class="btn-style btn-tranfer-signature"
+                  style="width: 100px"
+                >
+                  Chuyển
+                </button>
+                <button
+                  class="btn-style btn-save-file"
+                  style="margin-top: 12px; width: 100px"
+                >
+                  Lưu
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="check-signature">
+        <div
+          style="
+            display: inline-block;
+            position: absolute;
+            top: 82px;
+            left: 1055px;
+          "
+        >
+          <div class="error-message error-7">!</div>
+          <div class="message message-7"></div>
+        </div>
+        <div
+          style="
+            display: inline-block;
+            position: absolute;
+            top: 283px;
+            left: 1055px;
+          "
+        >
+          <div class="error-message error-8">!</div>
+          <div class="message message-8"></div>
+        </div>
+        <div
+          style="
+            width: 100%;
+            padding-top: 6px;
+            text-align: center;
+            height: 60px;
+            font-size: 30px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          "
+        >
+          Kiểm tra chữ ký
+        </div>
+        <div style="padding: 20px">
+          <div style="display: flex">
+            <div style="margin-right: 12px">Văn bản ký:</div>
+            <div
+              class="plain-text-input-check"
+              contenteditable="true"
+              style="
+                white-space: pre-wrap;
+                width: 300px;
+                height: 180px;
+                padding: 5px;
+                overflow: auto;
+                border: 1px solid black;
+              "
+            ></div>
+            <div style="margin-left: 10px; width: 96px">
+              <button class="btn-style btn-file-upload-1" style="width: 100px">
+                File văn bản
+              </button>
+              <input
+                type="file"
+                class="input-file-upload input-file-upload-1"
+                hidden
+                accept=".txt, .docx"
+              />
+              <textarea
+                name="output-file-name"
+                class="output-file-name-1"
+                style="
+                  width: 101px;
+                  height: 118px;
+                  resize: none;
+                  margin-top: 5px;
+                  border: none;
+                "
+                id=""
+                cols="30"
+                rows="10"
+                readonly
+              ></textarea>
+            </div>
+          </div>
+          <div style="display: flex; margin-top: 15px">
+            <div style="margin-right: 44px">Chữ ký:</div>
+            <div
+              class="input-signature-digital-check"
+              contenteditable="true"
+              style="
+                width: 301px;
+                height: 180px;
+                padding: 5px;
+                overflow: auto;
+                border: 1px solid black;
+              "
+            ></div>
+            <div style="margin-left: 10px; width: 96px">
+              <button class="btn-style btn-file-upload-2" style="width: 100px">
+                File chữ ký
+              </button>
+              <input
+                type="file"
+                class="input-file-upload input-file-upload-2"
+                hidden
+                accept=".txt"
+              />
+              <textarea
+                name="output-file-name"
+                class="output-file-name-2"
+                style="
+                  width: 101px;
+                  height: 118px;
+                  resize: none;
+                  margin-top: 5px;
+                  border: none;
+                "
+                id=""
+                cols="30"
+                rows="10"
+                readonly
+              ></textarea>
+            </div>
+          </div>
+          <div style="padding: 20px">
+            <button
+              class="btn-style btn-check-signature"
+              style="margin-left: 160px"
+            >
+              Kiểm tra chữ ký
+            </button>
+          </div>
+          <div style="display: flex; margin-top: 15px">
+            <div style="margin-right: 12px">Thông báo:</div>
+            <textarea
+              readonly
+              name="content-input"
+              class="message-check"
+              cols="30"
+              rows="10"
+              style="width: 300px; height: 180px; padding: 5px; resize: none"
+            ></textarea>
+          </div>
+        </div>
+        <img
+          class="btn-clear-all"
+          style="position: absolute; bottom: 12px; width: 40px; right: 12px; cursor: pointer;"
+          src="data:image/png;base64,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"
+          alt=""
+        />
+      </div>
+    </div>
+    <script type="module" src="../js/events.js"></script>
+  </body>
+</html>

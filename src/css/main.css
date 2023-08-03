@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  overflow: hidden;
+}
+
+#main {
+  display: flex;
+}
+
+.key-block {
+  width: 380px;
+  height: 790px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1)
+}
+
+.wrapper{
+  width: 325px;
+  background: #fff;
+  padding: 18px;
+}
+.wrapper .input-data{
+  height: 40px;
+  width: 100%;
+  position: relative;
+}
+.wrapper .input-data input{
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 17px;
+  border-bottom: 2px solid silver;
+}
+.input-data input:focus ~ label,
+.input-data input:valid ~ label{
+  transform: translateY(-20px);
+  font-size: 15px;
+  color: #4158d0;
+}
+.wrapper .input-data label{
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  color: grey;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.input-data .underline{
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  bottom: 0;
+}
+.input-data .underline:before{
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: #4158d0;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.input-data input:focus ~ .underline:before,
+.input-data input:valid ~ .underline:before{
+  transform: scaleX(1);
+}
+
+.btn-style {
+  color: #fff;
+  padding: 8px 22px;
+  border: none;
+  border-radius: 6px;
+  background: #7d2ae8;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-style:active {
+  transform: scale(0.96);
+}
+
+.generate-signature {
+  width: 550px;
+  height: 790px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1)
+}
+
+.check-signature {
+  width: 550px;
+  height: 790px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1)
+}
+
+.error-message {
+  display: none;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: red;
+  color: white;
+}
+
+.error-0, .error-1, .error-2, .error-3, .error-4, .error-5, .error-6, .error-7, .error-8 {
+  display: none;
+}
+
+.message {
+  display: none;
+  color: white;
+  background-color: red;
+  padding: 0px 8px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+.error-0:hover + .message-0, 
+.error-1:hover + .message-1, 
+.error-2:hover + .message-2,
+.error-3:hover + .message-3,
+.error-4:hover + .message-4,
+.error-5:hover + .message-5,
+.error-6:hover + .message-6,
+.error-7:hover + .message-7,
+.error-8:hover + .message-8 {
+  display: inline-block;
+}
